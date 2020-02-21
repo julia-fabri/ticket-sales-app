@@ -1,0 +1,24 @@
+.bg-light {
+    background-color: #250542 !important;
+}
+
+.navbar-light .navbar-brand {
+    color: #ff3d55;
+    font-weight: 700;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(234, 234, 234, 0.9);
+    font-weight: 500;
+}
+
+.btn-outline-success {
+  color: #ff3d55;
+  border-color: #ff3d55;
+}
+
+.btn-outline-success:hover {
+    color: #fff;
+    background-color: #ff3d55;
+    border-color: #ff3d55;
+}
