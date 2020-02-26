@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Cadastrar Show{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="static/concert_register.css">
+{% endblock %}
+{% block content %}
+<div class="form">
+  <form action="">
+      <label for="band_name">Nome da Banda</label>
+      <input type="band_name" class="form-control" id="band_name" name="band_name">
+
+      <label for="local">Local do Show</label>
+      <input type="text" class="form-control" id="local" name="local">
+
+      <label for="datetime">Data</label>
+      <input type="date" class="form-control" id="datetime" name="datetime">
+
+      <label for="time">Horário</label>
+      <input type="time" class="form-control" id="time" name="time">
+
+      <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>
+
+{% endblock %}
