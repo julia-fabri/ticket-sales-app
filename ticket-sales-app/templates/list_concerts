@@ -1,7 +1,0 @@
-{% block content %}
-  <ul>
-  {% for band in bands %}
-      <li>{{ band.band_name }}</li>
-  {% endfor %}
-  </ul>
-{% endblock %}
