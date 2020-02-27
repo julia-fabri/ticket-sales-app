@@ -1,6 +1,6 @@
 class Concerts():
 
-    count = 1
-
-    def __init__(self, band_name):
+    def __init__(self, band_name, local, datetime):
         self.band_name = band_name
+        self.local = local
+        self.datetime = datetime
