@@ -16,28 +16,32 @@ def create():
 	if request.method=='POST':
 		conn = sqlite3.connect("tickets.db")
 		c = conn.cursor()
-		name = request.form['band_name']
-		print(name)
-		c.execute("INSERT INTO bands (name) VALUES (?)",(name,))
+
+		#bands db
+		band_name = request.form['band_name']
+		category = request.form['category']
+
+		#concerts db
+		local = request.form['local']
+		date = request.form['date']
+		time = request.form['time']
+
+		c.execute("INSERT INTO bands (name, category) VALUES (?, ?)",(band_name, category))
+
+		# c.execute("INSERT INTO concerts (band_id, local, date, time) VALUES (?, ?, ?, ?)",(band_id, local, date, time,))
 		conn.commit()
-		print("inserted")
 		return "ok"
 	else:
 		return "não"
 
 @app.route('/list', methods=['GET', 'POST'])
 def list():
-	name = request.form['band_name']
+	conn = sqlite3.connect("tickets.db")
+	c = conn.cursor()
+	c.execute("SELECT name FROM bands")
+	name = c.fetchall()
 	print(name)
-	band = Concerts(name)
-	concerts.append(band)
-
-	return render_template('list_concerts.html', concerts=concerts)
-
-# @app.route('/data')
-# def list_concerts():
-#     band = request.args.get('band_name')
-#     return f"You put {band}"
+	return render_template('list_concerts.html', name=name)
 
 @app.route('/concerts/', methods=['GET', 'POST'])
 def show():

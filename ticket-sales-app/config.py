@@ -18,7 +18,8 @@ c.execute('''CREATE TABLE IF NOT EXISTS concerts
              ID INTEGER PRIMARY KEY AUTOINCREMENT,
              BANDS_ID INT NOT NULL,
              LOCAL VARCHAR (250),
-             DATE DATETIME,
+             DATE DATE,
+             TIME TIME, 
              TICKETS_AVAILABLE,
              CONSTRAINT FK_BANDS_ID FOREIGN KEY (BANDS_ID) REFERENCES BANDS(ID)
              )''')
