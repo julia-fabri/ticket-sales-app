@@ -6,18 +6,23 @@
 {% endblock %}
 {% block content %}
 <div class="form">
-  <form action="/update_band" method="post">
+  <form action="/update_concert" method="post">
+      {% for c in concert %}
+        <label for="band_name">Banda</label>
+        <input type="text" class="form-control" id="band_name" name="band_name" value="{{ c[4] }}" disabled="disabled">
 
-     {% for x in band %}
-        <input type="hidden" name="id" value="{{ x[0] }}">
-        <label for="band_name">Nome da Banda</label>
-        <input type="band_name" class="form-control" id="band_name" name="band_name" value="{{ x[1] }}">
+        <input type="hidden" name="id" value="{{ c[0] }}">
+        <label for="local">Local</label>
+        <input type="text" class="form-control" id="local" name="local" value="{{ c[1] }}">
 
-        <label for="category">Gênero Musical</label>
-        <input type="category" class="form-control" id="category" name="category" value="{{ x[2] }}">
+        <label for="tickets_amount">Quantidade Ingressos</label>
+        <input type="number" class="form-control" id="tickets_amount" name="tickets_amount" value="{{ c[2] }}">
+
+        <label for="date">Data</label>
+        <input type="date" class="form-control" id="date" name="date" value="{{ c[3] }}">
+
+        <input type="submit" class="btn btn-default" value="Submit Form">Submit</button>
       {% endfor %}
-
-      <input type="submit" class="btn btn-default" value="Submit Form">Submit</button>
   </form>
 </div>
 

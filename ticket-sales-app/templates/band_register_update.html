@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Cadastrar Show{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="/static/concert_register.css">
+{% endblock %}
+{% block content %}
+<div class="form">
+  <form action="/update_band" method="post">
+
+     {% for x in band %}
+        <input type="hidden" name="id" value="{{ x[0] }}">
+        <label for="band_name">Nome da Banda</label>
+        <input type="band_name" class="form-control" id="band_name" name="band_name" value="{{ x[1] }}">
+
+        <label for="category">Gênero Musical</label>
+        <input type="category" class="form-control" id="category" name="category" value="{{ x[2] }}">
+      {% endfor %}
+
+      <input type="submit" class="btn btn-default" value="Submit Form">Submit</button>
+  </form>
+</div>
+
+{% endblock %}

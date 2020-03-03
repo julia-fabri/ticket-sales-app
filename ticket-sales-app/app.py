@@ -14,7 +14,7 @@ def index():
 
 	return render_template('index.html', data=data)
 
-@app.route('/new', methods=['GET'])
+@app.route('/new_band', methods=['GET'])
 def new():
 	return render_template('band_register.html')
 
@@ -73,7 +73,7 @@ def edit_band(id):
 	c.execute("SELECT * FROM bands WHERE id = (?)", (id,))
 	band = c.fetchall()
 
-	return render_template('concert_register_update.html', band=band)
+	return render_template('band_register_update.html', band=band)
 
 @app.route('/update_band', methods=['POST', 'DELETE'])
 def update_band():
@@ -87,5 +87,71 @@ def update_band():
 	conn.commit()
 
 	return redirect(url_for('list_bands'))
+
+
+@app.route('/new_concert')
+def new_concert():
+	conn = sqlite3.connect("tickets.db")
+	c = conn.cursor()
+
+	c.execute("SELECT * FROM bands")
+	bands = c.fetchall()
+	return render_template('concert_register.html', bands=bands)
+
+@app.route('/create_concert', methods=['POST'])
+def create_concert():
+	if request.method=='POST':
+		conn = sqlite3.connect("tickets.db")
+		c = conn.cursor()
+
+		local = request.form['local']
+		date = request.form['date']
+		band_id = request.form['band_id']
+		tickets = request.form['tickets_amount']
+
+		c.execute("INSERT INTO concerts (local, date, bands_id, tickets_available) VALUES (?, ?, ?, ?)",(local, date, band_id, tickets))
+
+		conn.commit()
+
+		return redirect(url_for('list_concerts'))
+	else:
+		return "erro"
+
+@app.route('/list_concerts', methods=['GET', 'POST'])
+def list_concerts():
+	conn = sqlite3.connect("tickets.db")
+	c = conn.cursor()
+	c.execute("SELECT concerts.id, concerts.local, concerts.tickets_available, concerts.date, bands.name FROM concerts LEFT JOIN bands ON bands.id = concerts.bands_id")
+	data = c.fetchall()
+
+	return render_template('list_concerts.html', data=data)
+
+@app.route('/edit_concert/<id>')
+def edit_concert(id):
+	conn = sqlite3.connect("tickets.db")
+	c = conn.cursor()
+
+	c.execute("SELECT concerts.id, concerts.local, concerts.tickets_available, concerts.date, bands.name FROM concerts LEFT JOIN bands ON bands.id = concerts.bands_id WHERE concerts.id = (?)", (id,))
+	concert = c.fetchall()
+
+	return render_template('concert_register_update.html', concert=concert)
+
+
+@app.route('/update_concert', methods=['POST', 'DELETE'])
+def update_concert():
+	id = request.form['id']
+	local = request.form['local']
+	tickets = request.form['tickets_amount']
+	date = request.form['date']
+
+	conn = sqlite3.connect("tickets.db")
+	c = conn.cursor()
+
+	c.execute("UPDATE concerts SET local = (?), tickets_available = (?), date = (?) WHERE id = (?)", (local, tickets, date, id))
+	conn.commit()
+
+	return redirect(url_for('list_concerts'))
+
+
 
 app.run(debug=True)
