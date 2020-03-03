@@ -16,8 +16,8 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-						<h2><b>Shows Disponíveis</b></h2>
-					</div>
+						            <h2><b>Bandas Disponíveis</b></h2>
+					          </div>
                 </div>
             </div>
             <table class="table table-striped table-hover">
@@ -31,13 +31,11 @@
 						</th>
                         <th>ID Banda</th>
                         <th>Nome Banda</th>
-                        <th>Local</th>
-						            <th>Data</th>
                         <th>Gẽnero</th>
                     </tr>
                 </thead>
                 <tbody>
-  					{% for n in name %}
+  					{% for n in data %}
                     <tr>
 						<td>
 							<span class="custom-checkbox">
@@ -48,17 +46,15 @@
                         <td>{{ n[0] }}</td>
                         <td>{{ n[1] }}</td>
                         <td>{{ n[2] }}</td>
-                        <td>{{ n[3] }}</td>
-                        <td>{{ n[4] }}</td>
                         <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a href="/edit_band/{{ n[0] }}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                             <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
                  	{% endfor %}
                 </tbody>
             </table>
-			<div class="clearfix">
+			      <div class="clearfix">
                 <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
                 <ul class="pagination">
                     <li class="page-item disabled"><a href="#">Previous</a></li>
@@ -118,19 +114,19 @@
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							<label>Name</label>
+							<label>Nome Banda</label>
 							<input type="text" class="form-control" required>
 						</div>
 						<div class="form-group">
-							<label>Email</label>
-							<input type="email" class="form-control" required>
+							<label>Local</label>
+							<input type="text" class="form-control" required>
 						</div>
-						<div class="form-group">
-							<label>Address</label>
+						<!-- <div class="form-group">
+							<label>Data</label>
 							<textarea class="form-control" required></textarea>
-						</div>
+						</div> -->
 						<div class="form-group">
-							<label>Phone</label>
+							<label>Gênero</label>
 							<input type="text" class="form-control" required>
 						</div>
 					</div>
@@ -151,11 +147,8 @@
 						<h4 class="modal-title">Delete Employee</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
-					<div class="modal-body">
-						<p class="text-warning"><small>This action cannot be undone.</small></p>
-					</div>
 					<div class="modal-footer">
-						<p>Digite ID do show para confirmar?</p>
+						<p>Digite ID da banda para confirmar?</p>
 						<label for="id">ID</label>
 						<input type="text" name="id" class="btn btn-danger">
 

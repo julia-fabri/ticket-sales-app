@@ -6,24 +6,12 @@
 {% endblock %}
 {% block content %}
 <div class="form">
-  <form action="/create" method="post">
+  <form action="/create_band" method="post">
       <label for="band_name">Nome da Banda</label>
       <input type="band_name" class="form-control" id="band_name" name="band_name">
 
       <label for="category">Gênero Musical</label>
       <input type="category" class="form-control" id="category" name="category">
-
-      <label for="local">Local do Show</label>
-      <input type="text" class="form-control" id="local" name="local">
-
-      <label for="tickets">Quantidade Ingressos Disponíveis</label>
-      <input type="number" class="form-control" id="tickets" name="tickets">
-
-      <label for="date">Data</label>
-      <input type="date" class="form-control" id="date" name="date">
-
-      <label for="time">Horário</label>
-      <input type="time" class="form-control" id="time" name="time">
 
       <input type="submit" class="btn btn-default" value="Submit Form">Submit</button>
   </form>
