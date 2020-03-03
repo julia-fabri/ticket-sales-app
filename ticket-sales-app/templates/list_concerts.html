@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
+
 {% endblock %}
 {% block content %}
     <div class="container">
@@ -16,11 +16,7 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-						<h2><b>Bandas</b></h2>
-					</div>
-					<div class="col-sm-6">
-						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
-						<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+						<h2><b>Shows Disponíveis</b></h2>
 					</div>
                 </div>
             </div>
@@ -31,16 +27,17 @@
 							<span class="custom-checkbox">
 								<input type="checkbox" id="selectAll">
 								<label for="selectAll"></label>
-							</span>
+							</s    pan>
 						</th>
-                        <th>ID</th>
-                        <th>Nome da Banda</th>
-						<th>Gênero</th>
-                        <th>Actions</th>
+                        <th>ID Banda</th>
+                        <th>Nome Banda</th>
+                        <th>Local</th>
+						            <th>Data</th>
+                        <th>Gẽnero</th>
                     </tr>
                 </thead>
                 <tbody>
-  					{% for n in name %}	
+  					{% for n in name %}
                     <tr>
 						<td>
 							<span class="custom-checkbox">
@@ -51,6 +48,8 @@
                         <td>{{ n[0] }}</td>
                         <td>{{ n[1] }}</td>
                         <td>{{ n[2] }}</td>
+                        <td>{{ n[3] }}</td>
+                        <td>{{ n[4] }}</td>
                         <td>
                             <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                             <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -78,11 +77,11 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
-					<div class="modal-header">						
+					<div class="modal-header">
 						<h4 class="modal-title">Add Employee</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
-					<div class="modal-body">					
+					<div class="modal-body">
 						<div class="form-group">
 							<label>Name</label>
 							<input type="text" class="form-control" required>
@@ -98,7 +97,7 @@
 						<div class="form-group">
 							<label>Phone</label>
 							<input type="text" class="form-control" required>
-						</div>					
+						</div>
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -113,11 +112,11 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
-					<div class="modal-header">						
+					<div class="modal-header">
 						<h4 class="modal-title">Edit Employee</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
-					<div class="modal-body">					
+					<div class="modal-body">
 						<div class="form-group">
 							<label>Name</label>
 							<input type="text" class="form-control" required>
@@ -133,7 +132,7 @@
 						<div class="form-group">
 							<label>Phone</label>
 							<input type="text" class="form-control" required>
-						</div>					
+						</div>
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -148,15 +147,15 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form action="/delete" method="POST">
-					<div class="modal-header">						
+					<div class="modal-header">
 						<h4 class="modal-title">Delete Employee</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
-					<div class="modal-body">					
+					<div class="modal-body">
 						<p class="text-warning"><small>This action cannot be undone.</small></p>
 					</div>
 					<div class="modal-footer">
-						<p>Digite ID da banda para confirmar?</p>
+						<p>Digite ID do show para confirmar?</p>
 						<label for="id">ID</label>
 						<input type="text" name="id" class="btn btn-danger">
 
@@ -168,5 +167,5 @@
 		</div>
 	</div>
 </body>
-</html>                                		                            
+</html>
 {% endblock %}
