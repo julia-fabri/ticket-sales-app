@@ -60,8 +60,11 @@ def delete_band():
 		if request.form['action'] == 'Delete':
 			band_id = request.form['id']
 			conn = sqlite3.connect("tickets.db")
+			c = conn.cursor()
+			c.execute("DELETE FROM bands WHERE id = (?)", (band_id,))
+			conn.commit()
 
-			return render_template('list_bands.html', name=name)
+		return redirect(url_for('list_bands'))
 	return "erro"
 
 
@@ -151,6 +154,19 @@ def update_concert():
 	conn.commit()
 
 	return redirect(url_for('list_concerts'))
+
+@app.route('/delete_concert', methods=['POST', 'DELETE'])
+def delete_concert():
+	if request.method == "POST":
+		if request.form['action'] == 'Delete':
+			concert_id = request.form['id']
+			conn = sqlite3.connect("tickets.db")
+			c = conn.cursor()
+			c.execute("DELETE FROM concerts WHERE id = (?)", (concert_id,))
+			conn.commit()
+
+		return redirect(url_for('list_concerts'))
+	return "erro"
 
 
 
