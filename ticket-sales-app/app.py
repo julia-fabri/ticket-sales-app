@@ -40,7 +40,7 @@ def create_band():
 		# for band_id in band_id:
 		# 	c.execute("INSERT INTO concerts (bands_id, local, date, time) VALUES (?, ?, ?, ?)",(band_id[0], local, date, time,))
 		conn.commit()
-		conn.close()
+
 		return redirect(url_for('list_bands'))
 	else:
 		return "erro"
@@ -51,7 +51,6 @@ def list_bands():
 	c = conn.cursor()
 	c.execute("SELECT * FROM bands")
 	data = c.fetchall()
-	conn.close()
 
 	return render_template('list_bands.html', data=data)
 
@@ -64,7 +63,7 @@ def delete_band():
 			c = conn.cursor()
 			c.execute("DELETE FROM bands WHERE id = (?)", (band_id,))
 			conn.commit()
-			conn.close()
+
 		return redirect(url_for('list_bands'))
 	return "erro"
 
@@ -76,7 +75,7 @@ def edit_band(id):
 
 	c.execute("SELECT * FROM bands WHERE id = (?)", (id,))
 	band = c.fetchall()
-	conn.close()
+
 	return render_template('band_register_update.html', band=band)
 
 @app.route('/update_band', methods=['POST', 'DELETE'])
@@ -89,7 +88,7 @@ def update_band():
 	c = conn.cursor()
 	c.execute("UPDATE bands SET name = (?), category = (?) WHERE id = (?)", (band_name, category, id))
 	conn.commit()
-	conn.close()
+
 	return redirect(url_for('list_bands'))
 
 
@@ -97,7 +96,7 @@ def update_band():
 def new_concert():
 	conn = sqlite3.connect("tickets.db")
 	c = conn.cursor()
-	conn.close()
+
 	c.execute("SELECT * FROM bands")
 	bands = c.fetchall()
 	return render_template('concert_register.html', bands=bands)
@@ -116,7 +115,7 @@ def create_concert():
 		c.execute("INSERT INTO concerts (local, date, bands_id, tickets_available) VALUES (?, ?, ?, ?)",(local, date, band_id, tickets))
 
 		conn.commit()
-		conn.close()
+
 		return redirect(url_for('list_concerts'))
 	else:
 		return "erro"
@@ -127,7 +126,7 @@ def list_concerts():
 	c = conn.cursor()
 	c.execute("SELECT concerts.id, concerts.local, concerts.tickets_available, concerts.date, bands.name FROM concerts LEFT JOIN bands ON bands.id = concerts.bands_id")
 	data = c.fetchall()
-	conn.close()
+
 	return render_template('list_concerts.html', data=data)
 
 @app.route('/edit_concert/<id>')
@@ -137,7 +136,7 @@ def edit_concert(id):
 
 	c.execute("SELECT concerts.id, concerts.local, concerts.tickets_available, concerts.date, bands.name FROM concerts LEFT JOIN bands ON bands.id = concerts.bands_id WHERE concerts.id = (?)", (id,))
 	concert = c.fetchall()
-	conn.close()
+
 	return render_template('concert_register_update.html', concert=concert)
 
 
@@ -153,7 +152,7 @@ def update_concert():
 
 	c.execute("UPDATE concerts SET local = (?), tickets_available = (?), date = (?) WHERE id = (?)", (local, tickets, date, id))
 	conn.commit()
-	conn.close()
+
 	return redirect(url_for('list_concerts'))
 
 @app.route('/delete_concert', methods=['POST', 'DELETE'])
@@ -165,7 +164,7 @@ def delete_concert():
 			c = conn.cursor()
 			c.execute("DELETE FROM concerts WHERE id = (?)", (concert_id,))
 			conn.commit()
-			conn.close()
+
 		return redirect(url_for('list_concerts'))
 	return "erro"
 
