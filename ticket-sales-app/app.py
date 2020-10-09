@@ -7,11 +7,8 @@ app = Flask(__name__)
 def index():
 	conn = sqlite3.connect("tickets.db")
 	c = conn.cursor()
-
 	c.execute("SELECT bands.name, concerts.local, concerts.tickets_available FROM bands JOIN concerts ON bands.id = concerts.bands_id")
 	data = c.fetchall()
-	print("MINHA DATA", data)
-
 	return render_template('index.html', data=data)
 
 @app.route('/new_band', methods=['GET'])
