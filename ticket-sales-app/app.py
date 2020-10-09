@@ -23,22 +23,8 @@ def create_band():
 	if request.method=='POST':
 		conn = sqlite3.connect("tickets.db")
 		c = conn.cursor()
-
-		#bands db
 		band_name = request.form['band_name']
-		category = request.form['category']
-		#concerts db
-		# local = request.form['local']
-		# date = request.form['date']
-		# time = request.form['time']
-
 		c.execute("INSERT INTO bands (name, category) VALUES (?, ?)",(band_name, category))
-		#
-		# c.execute("SELECT id FROM bands")
-		# band_id = c.fetchall()
-
-		# for band_id in band_id:
-		# 	c.execute("INSERT INTO concerts (bands_id, local, date, time) VALUES (?, ?, ?, ?)",(band_id[0], local, date, time,))
 		conn.commit()
 		conn.close()
 		return redirect(url_for('list_bands'))
